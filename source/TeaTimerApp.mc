@@ -7,12 +7,23 @@ using Toybox.Lang;
 
 var timerView;
 
-// Tea types: [name, seconds, color]
+class Tea {
+    var name;
+    var durationSeconds;
+    var color;
+
+    function initialize(name, durationSeconds, color) {
+        self.name = name;
+        self.durationSeconds = durationSeconds;
+        self.color = color;
+    }
+}
+
 var teaTypes = [
-    ["Earl Grey", 240, Graphics.COLOR_ORANGE],     // 4 minutes - orange/brown for black tea
-    ["Jasmine", 150, Graphics.COLOR_YELLOW],       // 2.5 minutes - yellow for jasmine
-    ["Green", 120, Graphics.COLOR_GREEN],          // 2 minutes - green
-    ["Mint", 360, Graphics.COLOR_BLUE]             // 6 minutes - blue/mint
+    new Tea("Earl Grey", 240, Graphics.COLOR_ORANGE),  // 4 minutes
+    new Tea("Jasmine", 150, Graphics.COLOR_YELLOW),    // 2.5 minutes
+    new Tea("Green", 120, Graphics.COLOR_GREEN),       // 2 minutes
+    new Tea("Mint", 360, Graphics.COLOR_BLUE)          // 6 minutes
 ];
 var currentTeaIndex = 0;
 
@@ -34,7 +45,7 @@ class TeaTimerView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        secondsRemaining = teaTypes[currentTeaIndex][1];
+        secondsRemaining = teaTypes[currentTeaIndex].durationSeconds;
         timer = new Timer.Timer();
     }
 
@@ -61,7 +72,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function restart() {
-        secondsRemaining = teaTypes[currentTeaIndex][1];
+        secondsRemaining = teaTypes[currentTeaIndex].durationSeconds;
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
@@ -84,10 +95,9 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function drawProgressArc(dc) {
-        var totalSeconds = teaTypes[currentTeaIndex][1];
-        var elapsedSeconds = totalSeconds - secondsRemaining;
-        var progress = elapsedSeconds.toFloat() / totalSeconds.toFloat();
-        var teaColor = teaTypes[currentTeaIndex][2];
+        var currentTea = teaTypes[currentTeaIndex];
+        var elapsedSeconds = currentTea.durationSeconds - secondsRemaining;
+        var progress = elapsedSeconds.toFloat() / currentTea.durationSeconds.toFloat();
 
         // Only draw progress if timer has started
         if (elapsedSeconds > 0) {
@@ -98,31 +108,30 @@ class TeaTimerView extends WatchUi.View {
             // Calculate arc angle (0 = top, clockwise)
             var arcAngle = (progress * 360).toNumber();
 
-            dc.setColor(teaColor, Graphics.COLOR_BLACK);
+            dc.setColor(currentTea.color, Graphics.COLOR_BLACK);
             dc.setPenWidth(6);
             dc.drawArc(centerX, centerY, radius, Graphics.ARC_CLOCKWISE, 90, 90 - arcAngle);
         }
     }
 
     function drawTeaName(dc) {
-        var teaName = teaTypes[currentTeaIndex][0];
-        var teaColor = teaTypes[currentTeaIndex][2];
+        var currentTea = teaTypes[currentTeaIndex];
 
-        dc.setColor(teaColor, Graphics.COLOR_BLACK);
+        dc.setColor(currentTea.color, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 - 40,
             Graphics.FONT_MEDIUM,
-            teaName,
+            currentTea.name,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
     }
 
     function drawTimer(dc) {
         var timeString = formatTimeString();
-        var teaColor = teaTypes[currentTeaIndex][2];
+        var currentTea = teaTypes[currentTeaIndex];
 
-        dc.setColor(teaColor, Graphics.COLOR_BLACK);
+        dc.setColor(currentTea.color, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 + 20,
@@ -141,10 +150,10 @@ class TeaTimerView extends WatchUi.View {
 
         for (var i = 0; i < teaTypes.size(); i++) {
             var dotY = startY + i * dotSpacing;
-            var dotColor = teaTypes[i][2];
+            var tea = teaTypes[i];
 
             if (i == currentTeaIndex) {
-                dc.setColor(dotColor, Graphics.COLOR_BLACK);
+                dc.setColor(tea.color, Graphics.COLOR_BLACK);
                 dc.fillCircle(dotX, dotY, dotRadius);
             } else {
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_BLACK);
