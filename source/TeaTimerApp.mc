@@ -46,13 +46,13 @@ class TeaTimer {
         }
     }
 
-    function getElapsedSeconds() {
+    function elapsedSeconds() {
         return durationSeconds - secondsRemaining;
     }
 
-    function getProgress() {
-        var elapsedSeconds = getElapsedSeconds();
-        return elapsedSeconds.toFloat() / durationSeconds.toFloat();
+    function progress() {
+        var elapsed = elapsedSeconds();
+        return elapsed.toFloat() / durationSeconds.toFloat();
     }
 
     function formatTimeRemaining() {
@@ -142,14 +142,14 @@ class TeaTimerView extends WatchUi.View {
         var currentTeaTimer = teaTypes[currentTeaIndex];
 
         // Only draw progress if timer has started
-        if (currentTeaTimer.getElapsedSeconds() > 0) {
+        if (currentTeaTimer.elapsedSeconds() > 0) {
             var centerX = dc.getWidth() / 2;
             var centerY = dc.getHeight() / 2;
             var radius = (dc.getWidth() / 2) - 10;
 
             // Calculate arc angle (0 = top, clockwise)
-            var progress = currentTeaTimer.getProgress();
-            var arcAngle = (progress * 360).toNumber();
+            var progressValue = currentTeaTimer.progress();
+            var arcAngle = (progressValue * 360).toNumber();
 
             dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
             dc.setPenWidth(6);
