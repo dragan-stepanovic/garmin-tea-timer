@@ -15,7 +15,7 @@ class TeaTimerApp extends Application.AppBase {
 }
 
 class TeaTimerView extends WatchUi.View {
-    var secondsRemaining = 3;
+    var secondsRemaining = 1;
     var timer;
 
     function initialize() {
@@ -28,7 +28,14 @@ class TeaTimerView extends WatchUi.View {
         if (secondsRemaining > 0) {
             secondsRemaining -= 1;
             if (secondsRemaining == 0) {
-                Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
+                Attention.vibrate([
+                    new Attention.VibeProfile(100, 500),
+                    new Attention.VibeProfile(0, 300),
+                    new Attention.VibeProfile(100, 500),
+                    new Attention.VibeProfile(0, 300),
+                    new Attention.VibeProfile(100, 500)
+                ]);
+                Attention.playTone(Attention.TONE_ALARM);
             }
         }
         WatchUi.requestUpdate();
