@@ -71,7 +71,7 @@ var teaTypes = [
     TeaTimer.green(),
     TeaTimer.mint()
 ];
-var currentTeaIndex = 0;
+var currentTeaTimerIndex = 0;
 
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
@@ -99,7 +99,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTick() as Void {
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         currentTeaTimer.tick();
         if (currentTeaTimer.isComplete()) {
@@ -116,7 +116,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function restart() {
-        teaTypes[currentTeaIndex].reset();
+        teaTypes[currentTeaTimerIndex].reset();
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
@@ -133,12 +133,12 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function formatTimeString() {
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
         return currentTeaTimer.formatTimeRemaining();
     }
 
     function drawProgressArc(dc) {
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         // Only draw progress if timer has started
         if (currentTeaTimer.elapsedSeconds() > 0) {
@@ -157,7 +157,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function drawTeaName(dc) {
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
         dc.drawText(
@@ -171,7 +171,7 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTimer(dc) {
         var timeString = formatTimeString();
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
         dc.drawText(
@@ -194,7 +194,7 @@ class TeaTimerView extends WatchUi.View {
             var dotY = startY + i * dotSpacing;
             var teaTimer = teaTypes[i];
 
-            if (i == currentTeaIndex) {
+            if (i == currentTeaTimerIndex) {
                 dc.setColor(teaTimer.color, Graphics.COLOR_BLACK);
                 dc.fillCircle(dotX, dotY, dotRadius);
             } else {
@@ -211,7 +211,7 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() {
-        var currentTeaTimer = teaTypes[currentTeaIndex];
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         if (currentTeaTimer.isComplete()) {
             timerView.restart();
@@ -223,7 +223,7 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
 
     function onNextPage() {
         if (!timerView.isRunning) {
-            currentTeaIndex = (currentTeaIndex + 1) % teaTypes.size();
+            currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
             timerView.restart();
         }
         return true;
@@ -231,7 +231,7 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
 
     function onPreviousPage() {
         if (!timerView.isRunning) {
-            currentTeaIndex = (currentTeaIndex - 1 + teaTypes.size()) % teaTypes.size();
+            currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
             timerView.restart();
         }
         return true;
