@@ -56,10 +56,10 @@ class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
         teaTypes = [
-            new EarlGreyTimer(),
             new JasmineTimer(),
-            new GreenTeaTimer(),
-            new MintTeaTimer()
+            new MintTeaTimer(),
+            new EarlGreyTimer(),
+            new GreenTeaTimer()
         ];
     }
 
