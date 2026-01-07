@@ -157,8 +157,7 @@ class TeaTimerView extends WatchUi.View {
             var radius = (dc.getWidth() / 2) - 10;
 
             // Calculate arc angle (0 = top, clockwise)
-            var progressValue = currentTeaTimer.completionRatio();
-            var arcAngle = (progressValue * 360).toNumber();
+            var arcAngle = (currentTeaTimer.completionRatio() * 360).toNumber();
 
             dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
             dc.setPenWidth(6);
