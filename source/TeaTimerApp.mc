@@ -186,7 +186,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function drawPageDots(dc) {
-        var dotRadius = 5;
+        var baseDotRadius = 5;
         var dotSpacing = 16;
         var totalHeight = (teaTypes.size() - 1) * dotSpacing;
         var dotX = dc.getWidth() - 25;
@@ -196,13 +196,22 @@ class TeaTimerView extends WatchUi.View {
             var dotY = startY + i * dotSpacing;
             var teaTimer = teaTypes[i];
 
+            // Calculate proximity-based radius
+            var distance = (i - currentTeaTimerIndex).abs();
+            var radius = baseDotRadius;
+
             if (i == currentTeaTimerIndex) {
+                radius = 7; // Largest for selected
                 dc.setColor(teaTimer.color, Graphics.COLOR_BLACK);
-                dc.fillCircle(dotX, dotY, dotRadius);
-            } else {
+            } else if (distance == 1) {
+                radius = 5; // Medium for adjacent
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_BLACK);
-                dc.fillCircle(dotX, dotY, dotRadius);
+            } else {
+                radius = 3; // Smallest for distant
+                dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_BLACK);
             }
+
+            dc.fillCircle(dotX, dotY, radius);
         }
     }
 }
