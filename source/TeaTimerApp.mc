@@ -24,9 +24,13 @@ class TeaTimer {
         secondsRemaining = durationSeconds;
     }
 
-    function tick() {
+    function tick(onComplete) {
         if (secondsRemaining > 0) {
             secondsRemaining -= 1;
+
+            if (secondsRemaining == 0) {
+                onComplete.invoke();
+            }
         }
     }
 
@@ -49,18 +53,11 @@ class TeaTimer {
     }
 }
 
-var teaTypes;
 var currentTeaTimerIndex = 0;
 
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
-        teaTypes = [
-            new JasmineTimer(),
-            new MintTeaTimer(),
-            new EarlGreyTimer(),
-            new GreenTeaTimer()
-        ];
     }
 
     function getInitialView() {
@@ -73,10 +70,17 @@ class TeaTimerView extends WatchUi.View {
     var timer;
     var isRunning = false;
     var currentTeaTimer;
+    var teaTypes;
 
     function initialize() {
         View.initialize();
         timer = new Timer.Timer();
+        teaTypes = [
+            new JasmineTimer(),
+            new MintTeaTimer(),
+            new EarlGreyTimer(),
+            new GreenTeaTimer()
+        ];
         currentTeaTimer = teaTypes[currentTeaTimerIndex];
     }
 
@@ -86,18 +90,19 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTick() as Void {
-        currentTeaTimer.tick();
-        if (currentTeaTimer.isComplete()) {
-            isRunning = false;
-            Attention.vibrate([
-                new Attention.VibeProfile(100, 500),
-                new Attention.VibeProfile(0, 300),
-                new Attention.VibeProfile(100, 500),
-                new Attention.VibeProfile(0, 300),
-                new Attention.VibeProfile(100, 500)
-            ]);
-        }
+        currentTeaTimer.tick(method(:onTimerComplete));
         WatchUi.requestUpdate();
+    }
+
+    function onTimerComplete() as Void {
+        isRunning = false;
+        Attention.vibrate([
+            new Attention.VibeProfile(100, 500),
+            new Attention.VibeProfile(0, 300),
+            new Attention.VibeProfile(100, 500),
+            new Attention.VibeProfile(0, 300),
+            new Attention.VibeProfile(100, 500)
+        ]);
     }
 
     function restart() {
