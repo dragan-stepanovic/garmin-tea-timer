@@ -65,17 +65,18 @@ class TeaTimer {
     }
 }
 
-var teaTypes = [
-    TeaTimer.earlGrey(),
-    TeaTimer.jasmine(),
-    TeaTimer.green(),
-    TeaTimer.mint()
-];
+var teaTypes;
 var currentTeaTimerIndex = 0;
 
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
+        teaTypes = [
+            TeaTimer.earlGrey(),
+            TeaTimer.jasmine(),
+            TeaTimer.green(),
+            TeaTimer.mint()
+        ];
     }
 
     function getInitialView() {
