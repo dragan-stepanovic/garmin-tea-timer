@@ -24,14 +24,18 @@ class TeaTimer {
         secondsRemaining = durationSeconds;
     }
 
+    function alreadyCompleted() {
+        return secondsRemaining == 0;
+    }
+
     function tick(onComplete) {
-        if (secondsRemaining == 0) {
+        if (alreadyCompleted()) {
             return;
         }
 
         secondsRemaining -= 1;
 
-        if (secondsRemaining == 0) {
+        if (isComplete()) {
             onComplete.invoke();
         }
     }
