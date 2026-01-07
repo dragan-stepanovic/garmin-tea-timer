@@ -72,10 +72,12 @@ class TeaTimerApp extends Application.AppBase {
 class TeaTimerView extends WatchUi.View {
     var timer;
     var isRunning = false;
+    var currentTeaTimer;
 
     function initialize() {
         View.initialize();
         timer = new Timer.Timer();
+        currentTeaTimer = teaTypes[currentTeaTimerIndex];
     }
 
     function startTimer() {
@@ -84,8 +86,6 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTick() as Void {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-
         currentTeaTimer.tick();
         if (currentTeaTimer.isComplete()) {
             isRunning = false;
@@ -101,15 +101,13 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function restart() {
-        teaTypes[currentTeaTimerIndex].reset();
+        currentTeaTimer.reset();
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
     }
 
     function onSelect() {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-
         if (currentTeaTimer.isComplete()) {
             restart();
         } else if (!isRunning) {
@@ -120,6 +118,7 @@ class TeaTimerView extends WatchUi.View {
     function onNextPage() {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
+            currentTeaTimer = teaTypes[currentTeaTimerIndex];
             restart();
         }
     }
@@ -127,6 +126,7 @@ class TeaTimerView extends WatchUi.View {
     function onPreviousPage() {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
+            currentTeaTimer = teaTypes[currentTeaTimerIndex];
             restart();
         }
     }
@@ -142,14 +142,11 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function formatTimeString() {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
         var minutesAndSeconds = currentTeaTimer.timeRemaining();
         return minutesAndSeconds[0] + ":" + minutesAndSeconds[1].format("%02d");
     }
 
     function drawProgressArc(dc) {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-
         // Only draw progress if timer has started
         if (currentTeaTimer.elapsedSeconds() > 0) {
             var centerX = dc.getWidth() / 2;
@@ -166,8 +163,6 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function drawTeaName(dc) {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-
         dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
@@ -180,7 +175,6 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTimer(dc) {
         var timeString = formatTimeString();
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
         dc.drawText(
