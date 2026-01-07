@@ -25,11 +25,14 @@ class TeaTimer {
     }
 
     function tick(onComplete) {
-        if (secondsRemaining > 0) {
-            secondsRemaining -= 1;
-            if (secondsRemaining == 0) {
-                onComplete.invoke();
-            }
+        if (secondsRemaining == 0) {
+            return;
+        }
+
+        secondsRemaining -= 1;
+
+        if (secondsRemaining == 0) {
+            onComplete.invoke();
         }
     }
 
