@@ -6,12 +6,12 @@ using Toybox.Attention;
 
 var timerView;
 
-// Tea types: [name, seconds]
+// Tea types: [name, seconds, icon]
 var teaTypes = [
-    ["Earl Grey", 240],  // 4 minutes
-    ["Jasmine", 150],    // 2.5 minutes
-    ["Green", 120],      // 2 minutes
-    ["Mint", 360]        // 6 minutes
+    ["Earl Grey", 240, "☕"],  // 4 minutes
+    ["Jasmine", 150, "🌸"],   // 2.5 minutes
+    ["Green", 120, "🍃"],     // 2 minutes
+    ["Mint", 360, "🌿"]       // 6 minutes
 ];
 var currentTeaIndex = 0;
 
@@ -83,9 +83,21 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTeaName(dc) {
         var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
+        var teaIcon = (teaTypes[currentTeaIndex] as Array)[2] as String;
+
+        // Draw icon above tea name
         dc.drawText(
             dc.getWidth() / 2,
-            dc.getHeight() / 2 - 40,
+            dc.getHeight() / 2 - 60,
+            Graphics.FONT_LARGE,
+            teaIcon,
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
+        );
+
+        // Draw tea name
+        dc.drawText(
+            dc.getWidth() / 2,
+            dc.getHeight() / 2 - 30,
             Graphics.FONT_MEDIUM,
             teaName,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
