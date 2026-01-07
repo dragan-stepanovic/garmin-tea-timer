@@ -80,12 +80,7 @@ class TeaTimerView extends WatchUi.View {
     function initialize() {
         View.initialize();
         timer = new Timer.Timer();
-        teaTypes = [
-            new JasmineTimer(),
-            new MintTeaTimer(),
-            new EarlGreyTimer(),
-            new GreenTeaTimer()
-        ];
+        teaTypes = TeaTimers.all();
         currentTeaTimer = teaTypes[currentTeaTimerIndex];
     }
 
