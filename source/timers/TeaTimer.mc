@@ -22,7 +22,7 @@ class TeaTimer {
             return;
         }
 
-        secondsRemaining = decrease(secondsRemaining);
+        secondsRemaining = secondsRemaining - 1;
 
         if (isComplete()) {
             onComplete.invoke();
@@ -41,10 +41,6 @@ class TeaTimer {
         var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return [minutes, seconds];
-    }
-
-    function decrease(seconds) {
-        return seconds - 1;
     }
 
     function alreadyCompleted() {
