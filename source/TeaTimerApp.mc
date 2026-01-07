@@ -20,22 +20,6 @@ class TeaTimer {
         self.secondsRemaining = durationSeconds;
     }
 
-    static function earlGrey() {
-        return new TeaTimer("Earl Grey", 240, Graphics.COLOR_ORANGE);
-    }
-
-    static function jasmine() {
-        return new TeaTimer("Jasmine", 150, Graphics.COLOR_YELLOW);
-    }
-
-    static function green() {
-        return new TeaTimer("Green", 120, Graphics.COLOR_GREEN);
-    }
-
-    static function mint() {
-        return new TeaTimer("Mint", 360, Graphics.COLOR_BLUE);
-    }
-
     function reset() {
         secondsRemaining = durationSeconds;
     }
@@ -65,6 +49,30 @@ class TeaTimer {
     }
 }
 
+class EarlGreyTimer extends TeaTimer {
+    function initialize() {
+        TeaTimer.initialize("Earl Grey", 240, Graphics.COLOR_ORANGE);
+    }
+}
+
+class JasmineTimer extends TeaTimer {
+    function initialize() {
+        TeaTimer.initialize("Jasmine", 150, Graphics.COLOR_YELLOW);
+    }
+}
+
+class GreenTeaTimer extends TeaTimer {
+    function initialize() {
+        TeaTimer.initialize("Green", 120, Graphics.COLOR_GREEN);
+    }
+}
+
+class MintTeaTimer extends TeaTimer {
+    function initialize() {
+        TeaTimer.initialize("Mint", 360, Graphics.COLOR_BLUE);
+    }
+}
+
 var teaTypes;
 var currentTeaTimerIndex = 0;
 
@@ -72,10 +80,10 @@ class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
         teaTypes = [
-            TeaTimer.earlGrey(),
-            TeaTimer.jasmine(),
-            TeaTimer.green(),
-            TeaTimer.mint()
+            new EarlGreyTimer(),
+            new JasmineTimer(),
+            new GreenTeaTimer(),
+            new MintTeaTimer()
         ];
     }
 
