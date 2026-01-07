@@ -136,6 +136,7 @@ class TeaTimerView extends WatchUi.View {
         dc.clear();
 
         drawProgressArc(dc);
+        drawTeaIcon(dc);
         drawTeaName(dc);
         drawTimer(dc);
         drawPageDots(dc);
@@ -183,6 +184,125 @@ class TeaTimerView extends WatchUi.View {
             timeString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
+    }
+
+    function drawTeaIcon(dc) {
+        var centerX = dc.getWidth() / 2;
+        var centerY = dc.getHeight() / 2 - 145;
+
+        if (currentTeaTimerIndex == 0) {
+            // Jasmine
+            drawJasmineFlower(dc, centerX, centerY);
+        } else if (currentTeaTimerIndex == 1) {
+            // Mint
+            drawMintLeaves(dc, centerX, centerY);
+        } else if (currentTeaTimerIndex == 2) {
+            // Earl Grey
+            drawSteamLines(dc, centerX, centerY);
+        } else if (currentTeaTimerIndex == 3) {
+            // Green Tea
+            drawTeaLeaf(dc, centerX, centerY);
+        }
+    }
+
+    function drawJasmineFlower(dc, centerX, centerY) {
+        var petalRadius = 6;
+        var centerDistance = 12;
+
+        dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
+
+        // Draw 5 petals in a circle pattern
+        for (var i = 0; i < 5; i++) {
+            var angle = (i * 72) - 90; // 360/5 = 72 degrees, start at top
+            var angleRad = angle * Math.PI / 180.0;
+            var petalX = centerX + (centerDistance * Math.cos(angleRad)).toNumber();
+            var petalY = centerY + (centerDistance * Math.sin(angleRad)).toNumber();
+            dc.fillCircle(petalX, petalY, petalRadius);
+        }
+
+        // Center of flower (white)
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+        dc.fillCircle(centerX, centerY, 4);
+    }
+
+    function drawMintLeaves(dc, centerX, centerY) {
+        dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
+        dc.setPenWidth(3);
+
+        // Center stem
+        dc.drawLine(centerX, centerY - 15, centerX, centerY + 15);
+
+        // Left leaf (upper)
+        dc.drawLine(centerX, centerY - 8, centerX - 10, centerY - 12);
+        dc.drawLine(centerX - 10, centerY - 12, centerX - 12, centerY - 8);
+
+        // Right leaf (upper)
+        dc.drawLine(centerX, centerY - 8, centerX + 10, centerY - 12);
+        dc.drawLine(centerX + 10, centerY - 12, centerX + 12, centerY - 8);
+
+        // Left leaf (middle)
+        dc.drawLine(centerX, centerY, centerX - 12, centerY - 2);
+        dc.drawLine(centerX - 12, centerY - 2, centerX - 14, centerY + 2);
+
+        // Right leaf (middle)
+        dc.drawLine(centerX, centerY, centerX + 12, centerY - 2);
+        dc.drawLine(centerX + 12, centerY - 2, centerX + 14, centerY + 2);
+
+        // Left leaf (lower)
+        dc.drawLine(centerX, centerY + 8, centerX - 10, centerY + 5);
+        dc.drawLine(centerX - 10, centerY + 5, centerX - 12, centerY + 9);
+
+        // Right leaf (lower)
+        dc.drawLine(centerX, centerY + 8, centerX + 10, centerY + 5);
+        dc.drawLine(centerX + 10, centerY + 5, centerX + 12, centerY + 9);
+    }
+
+    function drawSteamLines(dc, centerX, centerY) {
+        dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
+        dc.setPenWidth(2);
+
+        // Three wavy steam lines
+        // Left steam line
+        dc.drawLine(centerX - 12, centerY + 10, centerX - 10, centerY + 5);
+        dc.drawLine(centerX - 10, centerY + 5, centerX - 12, centerY);
+        dc.drawLine(centerX - 12, centerY, centerX - 10, centerY - 5);
+        dc.drawLine(centerX - 10, centerY - 5, centerX - 12, centerY - 10);
+
+        // Center steam line
+        dc.drawLine(centerX, centerY + 10, centerX + 2, centerY + 5);
+        dc.drawLine(centerX + 2, centerY + 5, centerX, centerY);
+        dc.drawLine(centerX, centerY, centerX + 2, centerY - 5);
+        dc.drawLine(centerX + 2, centerY - 5, centerX, centerY - 10);
+
+        // Right steam line
+        dc.drawLine(centerX + 12, centerY + 10, centerX + 14, centerY + 5);
+        dc.drawLine(centerX + 14, centerY + 5, centerX + 12, centerY);
+        dc.drawLine(centerX + 12, centerY, centerX + 14, centerY - 5);
+        dc.drawLine(centerX + 14, centerY - 5, centerX + 12, centerY - 10);
+    }
+
+    function drawTeaLeaf(dc, centerX, centerY) {
+        dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
+        dc.setPenWidth(3);
+
+        // Leaf outline - teardrop shape
+        // Left side of leaf
+        dc.drawLine(centerX, centerY - 15, centerX - 8, centerY - 5);
+        dc.drawLine(centerX - 8, centerY - 5, centerX - 10, centerY + 5);
+        dc.drawLine(centerX - 10, centerY + 5, centerX - 5, centerY + 12);
+
+        // Right side of leaf
+        dc.drawLine(centerX, centerY - 15, centerX + 8, centerY - 5);
+        dc.drawLine(centerX + 8, centerY - 5, centerX + 10, centerY + 5);
+        dc.drawLine(centerX + 10, centerY + 5, centerX + 5, centerY + 12);
+
+        // Bottom point
+        dc.drawLine(centerX - 5, centerY + 12, centerX, centerY + 15);
+        dc.drawLine(centerX + 5, centerY + 12, centerX, centerY + 15);
+
+        // Center vein
+        dc.setPenWidth(2);
+        dc.drawLine(centerX, centerY - 12, centerX, centerY + 10);
     }
 
     function drawPageDots(dc) {
