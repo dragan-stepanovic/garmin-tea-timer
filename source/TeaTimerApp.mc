@@ -188,7 +188,7 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTeaIcon(dc) {
         var centerX = dc.getWidth() / 2;
-        var centerY = dc.getHeight() / 2 - 145;
+        var centerY = dc.getHeight() / 2 - 165;
 
         if (currentTeaTimerIndex == 0) {
             // Jasmine
