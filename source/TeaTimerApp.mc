@@ -31,7 +31,7 @@ class TeaTimerView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        secondsRemaining = teaTypes[currentTeaIndex][1];
+        secondsRemaining = (teaTypes[currentTeaIndex] as Array)[1] as Number;
         timer = new Timer.Timer();
     }
 
@@ -58,15 +58,15 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function restart() {
-        secondsRemaining = teaTypes[currentTeaIndex][1];
+        secondsRemaining = (teaTypes[currentTeaIndex] as Array)[1] as Number;
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
     }
 
     function onUpdate(dc) {
-        var teaName = teaTypes[currentTeaIndex][0];
-        var minutes = secondsRemaining / 60;
+        var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
+        var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         var timeString = minutes + ":" + seconds.format("%02d");
 
