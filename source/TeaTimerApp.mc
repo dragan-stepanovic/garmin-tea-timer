@@ -7,12 +7,12 @@ using Toybox.Lang;
 
 var timerView;
 
-// Tea types: [name, seconds]
+// Tea types: [name, seconds, color]
 var teaTypes = [
-    ["Earl Grey", 240],  // 4 minutes
-    ["Jasmine", 150],    // 2.5 minutes
-    ["Green", 120],      // 2 minutes
-    ["Mint", 360]        // 6 minutes
+    ["Earl Grey", 240, Graphics.COLOR_ORANGE],     // 4 minutes - orange/brown for black tea
+    ["Jasmine", 150, Graphics.COLOR_YELLOW],       // 2.5 minutes - yellow for jasmine
+    ["Green", 120, Graphics.COLOR_GREEN],          // 2 minutes - green
+    ["Mint", 360, Graphics.COLOR_BLUE]             // 6 minutes - blue/mint
 ];
 var currentTeaIndex = 0;
 
@@ -84,6 +84,9 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTeaName(dc) {
         var teaName = teaTypes[currentTeaIndex][0];
+        var teaColor = teaTypes[currentTeaIndex][2];
+
+        dc.setColor(teaColor, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 - 40,
@@ -95,6 +98,9 @@ class TeaTimerView extends WatchUi.View {
 
     function drawTimer(dc) {
         var timeString = formatTimeString();
+        var teaColor = teaTypes[currentTeaIndex][2];
+
+        dc.setColor(teaColor, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 + 20,
@@ -113,8 +119,10 @@ class TeaTimerView extends WatchUi.View {
 
         for (var i = 0; i < teaTypes.size(); i++) {
             var dotY = startY + i * dotSpacing;
+            var dotColor = teaTypes[i][2];
+
             if (i == currentTeaIndex) {
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+                dc.setColor(dotColor, Graphics.COLOR_BLACK);
                 dc.fillCircle(dotX, dotY, dotRadius);
             } else {
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_BLACK);
