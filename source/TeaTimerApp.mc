@@ -41,6 +41,12 @@ class TeaTimer {
     function isComplete() {
         return secondsRemaining == 0;
     }
+
+    function getMinutesAndSeconds() {
+        var minutes = (secondsRemaining / 60).toNumber();
+        var seconds = secondsRemaining % 60;
+        return [minutes, seconds];
+    }
 }
 
 class EarlGreyTimer extends TeaTimer {
@@ -161,9 +167,8 @@ class TeaTimerView extends WatchUi.View {
 
     function formatTimeString() {
         var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-        var minutes = (currentTeaTimer.secondsRemaining / 60).toNumber();
-        var seconds = currentTeaTimer.secondsRemaining % 60;
-        return minutes + ":" + seconds.format("%02d");
+        var minutesAndSeconds = currentTeaTimer.getMinutesAndSeconds();
+        return minutesAndSeconds[0] + ":" + minutesAndSeconds[1].format("%02d");
     }
 
     function drawProgressArc(dc) {
