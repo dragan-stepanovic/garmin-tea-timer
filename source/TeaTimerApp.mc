@@ -11,11 +11,13 @@ class TeaTimer {
     var name;
     var durationSeconds;
     var color;
+    var secondsRemaining;
 
     function initialize(name, durationSeconds, color) {
         self.name = name;
         self.durationSeconds = durationSeconds;
         self.color = color;
+        self.secondsRemaining = durationSeconds;
     }
 
     static function earlGrey() {
@@ -34,22 +36,32 @@ class TeaTimer {
         return new TeaTimer("Mint", 360, Graphics.COLOR_BLUE);
     }
 
-    function getElapsedSeconds(secondsRemaining) {
+    function reset() {
+        secondsRemaining = durationSeconds;
+    }
+
+    function tick() {
+        if (secondsRemaining > 0) {
+            secondsRemaining -= 1;
+        }
+    }
+
+    function getElapsedSeconds() {
         return durationSeconds - secondsRemaining;
     }
 
-    function getProgress(secondsRemaining) {
-        var elapsedSeconds = getElapsedSeconds(secondsRemaining);
+    function getProgress() {
+        var elapsedSeconds = getElapsedSeconds();
         return elapsedSeconds.toFloat() / durationSeconds.toFloat();
     }
 
-    function formatTimeRemaining(secondsRemaining) {
+    function formatTimeRemaining() {
         var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return minutes + ":" + seconds.format("%02d");
     }
 
-    function isComplete(secondsRemaining) {
+    function isComplete() {
         return secondsRemaining == 0;
     }
 }
@@ -74,13 +86,11 @@ class TeaTimerApp extends Application.AppBase {
 }
 
 class TeaTimerView extends WatchUi.View {
-    var secondsRemaining;
     var timer;
     var isRunning = false;
 
     function initialize() {
         View.initialize();
-        secondsRemaining = teaTypes[currentTeaIndex].durationSeconds;
         timer = new Timer.Timer();
     }
 
@@ -92,24 +102,22 @@ class TeaTimerView extends WatchUi.View {
     function onTick() as Void {
         var currentTea = teaTypes[currentTeaIndex];
 
-        if (secondsRemaining > 0) {
-            secondsRemaining -= 1;
-            if (currentTea.isComplete(secondsRemaining)) {
-                isRunning = false;
-                Attention.vibrate([
-                    new Attention.VibeProfile(100, 500),
-                    new Attention.VibeProfile(0, 300),
-                    new Attention.VibeProfile(100, 500),
-                    new Attention.VibeProfile(0, 300),
-                    new Attention.VibeProfile(100, 500)
-                ]);
-            }
+        currentTea.tick();
+        if (currentTea.isComplete()) {
+            isRunning = false;
+            Attention.vibrate([
+                new Attention.VibeProfile(100, 500),
+                new Attention.VibeProfile(0, 300),
+                new Attention.VibeProfile(100, 500),
+                new Attention.VibeProfile(0, 300),
+                new Attention.VibeProfile(100, 500)
+            ]);
         }
         WatchUi.requestUpdate();
     }
 
     function restart() {
-        secondsRemaining = teaTypes[currentTeaIndex].durationSeconds;
+        teaTypes[currentTeaIndex].reset();
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
@@ -127,12 +135,12 @@ class TeaTimerView extends WatchUi.View {
 
     function formatTimeString() {
         var currentTea = teaTypes[currentTeaIndex];
-        return currentTea.formatTimeRemaining(secondsRemaining);
+        return currentTea.formatTimeRemaining();
     }
 
     function drawProgressArc(dc) {
         var currentTea = teaTypes[currentTeaIndex];
-        var elapsedSeconds = currentTea.getElapsedSeconds(secondsRemaining);
+        var elapsedSeconds = currentTea.getElapsedSeconds();
 
         // Only draw progress if timer has started
         if (elapsedSeconds > 0) {
@@ -141,7 +149,7 @@ class TeaTimerView extends WatchUi.View {
             var radius = (dc.getWidth() / 2) - 10;
 
             // Calculate arc angle (0 = top, clockwise)
-            var progress = currentTea.getProgress(secondsRemaining);
+            var progress = currentTea.getProgress();
             var arcAngle = (progress * 360).toNumber();
 
             dc.setColor(currentTea.color, Graphics.COLOR_BLACK);
@@ -207,7 +215,7 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     function onSelect() {
         var currentTea = teaTypes[currentTeaIndex];
 
-        if (currentTea.isComplete(timerView.secondsRemaining)) {
+        if (currentTea.isComplete()) {
             timerView.restart();
         } else if (!timerView.isRunning) {
             timerView.startTimer();
