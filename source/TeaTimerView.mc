@@ -47,11 +47,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onSelect() {
-        if (currentTeaTimer.isComplete()) {
-            reset();
-        } else if (!isRunning) {
-            startTimer();
-        }
+        currentTeaTimer.onReadyOrComplete(method(:startTimer), method(:reset));
     }
 
     function onNextPage() {
