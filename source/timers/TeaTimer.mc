@@ -51,14 +51,6 @@ class TeaTimer {
         return secondsRemaining == 0;
     }
 
-    function isComplete() {
-        return secondsRemaining == 0;
-    }
-
-    function isReady() {
-        return elapsedSeconds() == 0;
-    }
-
     function onReadyOrComplete(onReady, onComplete) {
         if (isReady()) {
             onReady.invoke();
@@ -69,5 +61,13 @@ class TeaTimer {
             onComplete.invoke();
             return;
         }
+    }
+
+    function isComplete() {
+        return secondsRemaining == 0;
+    }
+
+    function isReady() {
+        return elapsedSeconds() == 0;
     }
 }
