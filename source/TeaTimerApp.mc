@@ -24,10 +24,6 @@ class TeaTimer {
         secondsRemaining = durationSeconds;
     }
 
-    function alreadyCompleted() {
-        return secondsRemaining == 0;
-    }
-
     function tick(onComplete) {
         if (alreadyCompleted()) {
             return;
@@ -48,14 +44,18 @@ class TeaTimer {
         return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }
 
-    function isComplete() {
-        return secondsRemaining == 0;
-    }
-
     function timeRemaining() {
         var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return [minutes, seconds];
+    }
+
+    function alreadyCompleted() {
+        return secondsRemaining == 0;
+    }
+
+    function isComplete() {
+        return secondsRemaining == 0;
     }
 }
 
