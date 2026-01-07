@@ -17,6 +17,10 @@ class Tea {
         self.durationSeconds = durationSeconds;
         self.color = color;
     }
+
+    function getElapsedSeconds(secondsRemaining) {
+        return durationSeconds - secondsRemaining;
+    }
 }
 
 var teaTypes = [
@@ -96,7 +100,7 @@ class TeaTimerView extends WatchUi.View {
 
     function drawProgressArc(dc) {
         var currentTea = teaTypes[currentTeaIndex];
-        var elapsedSeconds = currentTea.durationSeconds - secondsRemaining;
+        var elapsedSeconds = currentTea.getElapsedSeconds(secondsRemaining);
         var progress = elapsedSeconds.toFloat() / currentTea.durationSeconds.toFloat();
 
         // Only draw progress if timer has started
