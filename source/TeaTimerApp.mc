@@ -32,6 +32,10 @@ class Tea {
         var seconds = secondsRemaining % 60;
         return minutes + ":" + seconds.format("%02d");
     }
+
+    function isComplete(secondsRemaining) {
+        return secondsRemaining == 0;
+    }
 }
 
 var teaTypes = [
@@ -70,9 +74,11 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTick() as Void {
+        var currentTea = teaTypes[currentTeaIndex];
+
         if (secondsRemaining > 0) {
             secondsRemaining -= 1;
-            if (secondsRemaining == 0) {
+            if (currentTea.isComplete(secondsRemaining)) {
                 isRunning = false;
                 Attention.vibrate([
                     new Attention.VibeProfile(100, 500),
@@ -183,7 +189,9 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() {
-        if (timerView.secondsRemaining == 0) {
+        var currentTea = teaTypes[currentTeaIndex];
+
+        if (currentTea.isComplete(timerView.secondsRemaining)) {
             timerView.restart();
         } else if (!timerView.isRunning) {
             timerView.startTimer();
