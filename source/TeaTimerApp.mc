@@ -49,30 +49,6 @@ class TeaTimer {
     }
 }
 
-class EarlGreyTimer extends TeaTimer {
-    function initialize() {
-        TeaTimer.initialize("Earl Grey", 240, Graphics.COLOR_ORANGE);
-    }
-}
-
-class JasmineTimer extends TeaTimer {
-    function initialize() {
-        TeaTimer.initialize("Jasmine", 150, Graphics.COLOR_YELLOW);
-    }
-}
-
-class GreenTeaTimer extends TeaTimer {
-    function initialize() {
-        TeaTimer.initialize("Green", 120, Graphics.COLOR_GREEN);
-    }
-}
-
-class MintTeaTimer extends TeaTimer {
-    function initialize() {
-        TeaTimer.initialize("Mint", 360, Graphics.COLOR_BLUE);
-    }
-}
-
 var teaTypes;
 var currentTeaTimerIndex = 0;
 
