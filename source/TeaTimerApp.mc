@@ -18,6 +18,22 @@ class TeaTimer {
         self.color = color;
     }
 
+    static function earlGrey() {
+        return new TeaTimer("Earl Grey", 240, Graphics.COLOR_ORANGE);
+    }
+
+    static function jasmine() {
+        return new TeaTimer("Jasmine", 150, Graphics.COLOR_YELLOW);
+    }
+
+    static function green() {
+        return new TeaTimer("Green", 120, Graphics.COLOR_GREEN);
+    }
+
+    static function mint() {
+        return new TeaTimer("Mint", 360, Graphics.COLOR_BLUE);
+    }
+
     function getElapsedSeconds(secondsRemaining) {
         return durationSeconds - secondsRemaining;
     }
@@ -39,10 +55,10 @@ class TeaTimer {
 }
 
 var teaTypes = [
-    new TeaTimer("Earl Grey", 240, Graphics.COLOR_ORANGE),  // 4 minutes
-    new TeaTimer("Jasmine", 150, Graphics.COLOR_YELLOW),    // 2.5 minutes
-    new TeaTimer("Green", 120, Graphics.COLOR_GREEN),       // 2 minutes
-    new TeaTimer("Mint", 360, Graphics.COLOR_BLUE)          // 6 minutes
+    TeaTimer.earlGrey(),
+    TeaTimer.jasmine(),
+    TeaTimer.green(),
+    TeaTimer.mint()
 ];
 var currentTeaIndex = 0;
 
