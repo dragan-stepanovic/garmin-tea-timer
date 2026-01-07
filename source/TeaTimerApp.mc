@@ -59,8 +59,6 @@ class TeaTimer {
     }
 }
 
-var currentTeaTimerIndex = 0;
-
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
@@ -77,6 +75,7 @@ class TeaTimerView extends WatchUi.View {
     var isRunning = false;
     var currentTeaTimer;
     var teaTypes;
+    var currentTeaTimerIndex = 0;
 
     function initialize() {
         View.initialize();
