@@ -62,8 +62,12 @@ class TeaTimer {
     function onReadyOrComplete(onReady, onComplete) {
         if (isReady()) {
             onReady.invoke();
-        } else if (isComplete()) {
+            return
+        } 
+        
+        if (isComplete()) {
             onComplete.invoke();
+            return
         }
     }
 }
