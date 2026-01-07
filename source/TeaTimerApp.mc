@@ -140,10 +140,9 @@ class TeaTimerView extends WatchUi.View {
 
     function drawProgressArc(dc) {
         var currentTeaTimer = teaTypes[currentTeaIndex];
-        var elapsedSeconds = currentTeaTimer.getElapsedSeconds();
 
         // Only draw progress if timer has started
-        if (elapsedSeconds > 0) {
+        if (currentTeaTimer.getElapsedSeconds() > 0) {
             var centerX = dc.getWidth() / 2;
             var centerY = dc.getHeight() / 2;
             var radius = (dc.getWidth() / 2) - 10;
