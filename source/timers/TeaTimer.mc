@@ -63,11 +63,11 @@ class TeaTimer {
         }
     }
 
-    function isComplete() {
-        return secondsRemaining == 0;
-    }
-
     function isReady() {
         return elapsedSeconds() == 0;
     }
+
+    function isComplete() {
+        return secondsRemaining == 0;
+    }    
 }
