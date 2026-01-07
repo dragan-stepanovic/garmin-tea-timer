@@ -6,10 +6,12 @@ using Toybox.Attention;
 
 var timerView;
 
-// Tea types: [name, seconds] - using short times for testing
+// Tea types: [name, seconds]
 var teaTypes = [
-    ["Green", 3],
-    ["Black", 5]
+    ["Earl Grey", 240],  // 4 minutes
+    ["Jasmine", 150],    // 2.5 minutes
+    ["Green", 120],      // 2 minutes
+    ["Mint", 360]        // 6 minutes
 ];
 var currentTeaIndex = 0;
 
