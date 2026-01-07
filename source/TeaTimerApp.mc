@@ -51,8 +51,7 @@ class TeaTimer {
     }
 
     function progress() {
-        var elapsed = elapsedSeconds();
-        return elapsed.toFloat() / durationSeconds.toFloat();
+        return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }
 
     function formatTimeRemaining() {
