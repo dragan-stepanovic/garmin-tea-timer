@@ -2,6 +2,7 @@ using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.Graphics;
 using Toybox.Timer;
+using Toybox.Attention;
 
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
@@ -14,7 +15,7 @@ class TeaTimerApp extends Application.AppBase {
 }
 
 class TeaTimerView extends WatchUi.View {
-    var secondsRemaining = 300;
+    var secondsRemaining = 3;
     var timer;
 
     function initialize() {
@@ -26,6 +27,9 @@ class TeaTimerView extends WatchUi.View {
     function onTick() as Void {
         if (secondsRemaining > 0) {
             secondsRemaining -= 1;
+            if (secondsRemaining == 0) {
+                Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
+            }
         }
         WatchUi.requestUpdate();
     }
