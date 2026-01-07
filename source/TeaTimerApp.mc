@@ -107,7 +107,7 @@ class TeaTimerView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
-    function handleSelect() {
+    function onSelect() {
         var currentTeaTimer = teaTypes[currentTeaTimerIndex];
 
         if (currentTeaTimer.isComplete()) {
@@ -117,14 +117,14 @@ class TeaTimerView extends WatchUi.View {
         }
     }
 
-    function handleNextPage() {
+    function onNextPage() {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
             restart();
         }
     }
 
-    function handlePreviousPage() {
+    function onPreviousPage() {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
             restart();
@@ -220,17 +220,17 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() {
-        timerView.handleSelect();
+        timerView.onSelect();
         return true;
     }
 
     function onNextPage() {
-        timerView.handleNextPage();
+        timerView.onNextPage();
         return true;
     }
 
     function onPreviousPage() {
-        timerView.handlePreviousPage();
+        timerView.onPreviousPage();
         return true;
     }
 }
