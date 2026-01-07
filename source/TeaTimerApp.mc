@@ -42,7 +42,7 @@ class TeaTimer {
         return secondsRemaining == 0;
     }
 
-    function getMinutesAndSeconds() {
+    function timeRemaining() {
         var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return [minutes, seconds];
@@ -167,7 +167,7 @@ class TeaTimerView extends WatchUi.View {
 
     function formatTimeString() {
         var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-        var minutesAndSeconds = currentTeaTimer.getMinutesAndSeconds();
+        var minutesAndSeconds = currentTeaTimer.timeRemaining();
         return minutesAndSeconds[0] + ":" + minutesAndSeconds[1].format("%02d");
     }
 
