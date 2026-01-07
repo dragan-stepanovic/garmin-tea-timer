@@ -65,15 +65,22 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onUpdate(dc) {
-        var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
-        var minutes = ((secondsRemaining as Number) / 60).toNumber();
-        var seconds = secondsRemaining % 60;
-        var timeString = minutes + ":" + seconds.format("%02d");
-
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
-        // Tea name
+        drawTeaName(dc);
+        drawTimer(dc);
+        drawPageDots(dc);
+    }
+
+    function formatTimeString() {
+        var minutes = ((secondsRemaining as Number) / 60).toNumber();
+        var seconds = secondsRemaining % 60;
+        return minutes + ":" + seconds.format("%02d");
+    }
+
+    function drawTeaName(dc) {
+        var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 - 40,
@@ -81,8 +88,10 @@ class TeaTimerView extends WatchUi.View {
             teaName,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
+    }
 
-        // Time
+    function drawTimer(dc) {
+        var timeString = formatTimeString();
         dc.drawText(
             dc.getWidth() / 2,
             dc.getHeight() / 2 + 20,
@@ -90,8 +99,9 @@ class TeaTimerView extends WatchUi.View {
             timeString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
+    }
 
-        // Page dots (vertical, right side)
+    function drawPageDots(dc) {
         var dotRadius = 5;
         var dotSpacing = 16;
         var totalHeight = (teaTypes.size() - 1) * dotSpacing;
