@@ -7,7 +7,7 @@ using Toybox.Lang;
 
 var timerView;
 
-class Tea {
+class TeaTimer {
     var name;
     var durationSeconds;
     var color;
@@ -39,10 +39,10 @@ class Tea {
 }
 
 var teaTypes = [
-    new Tea("Earl Grey", 240, Graphics.COLOR_ORANGE),  // 4 minutes
-    new Tea("Jasmine", 150, Graphics.COLOR_YELLOW),    // 2.5 minutes
-    new Tea("Green", 120, Graphics.COLOR_GREEN),       // 2 minutes
-    new Tea("Mint", 360, Graphics.COLOR_BLUE)          // 6 minutes
+    new TeaTimer("Earl Grey", 240, Graphics.COLOR_ORANGE),  // 4 minutes
+    new TeaTimer("Jasmine", 150, Graphics.COLOR_YELLOW),    // 2.5 minutes
+    new TeaTimer("Green", 120, Graphics.COLOR_GREEN),       // 2 minutes
+    new TeaTimer("Mint", 360, Graphics.COLOR_BLUE)          // 6 minutes
 ];
 var currentTeaIndex = 0;
 
