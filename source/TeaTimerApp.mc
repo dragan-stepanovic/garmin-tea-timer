@@ -26,6 +26,12 @@ class Tea {
         var elapsedSeconds = getElapsedSeconds(secondsRemaining);
         return elapsedSeconds.toFloat() / durationSeconds.toFloat();
     }
+
+    function formatTimeRemaining(secondsRemaining) {
+        var minutes = (secondsRemaining / 60).toNumber();
+        var seconds = secondsRemaining % 60;
+        return minutes + ":" + seconds.format("%02d");
+    }
 }
 
 var teaTypes = [
@@ -98,9 +104,8 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function formatTimeString() {
-        var minutes = (secondsRemaining / 60).toNumber();
-        var seconds = secondsRemaining % 60;
-        return minutes + ":" + seconds.format("%02d");
+        var currentTea = teaTypes[currentTeaIndex];
+        return currentTea.formatTimeRemaining(secondsRemaining);
     }
 
     function drawProgressArc(dc) {
