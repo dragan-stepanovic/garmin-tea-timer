@@ -166,7 +166,7 @@ class TeaTimerView extends WatchUi.View {
         dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
-            dc.getHeight() / 2 - 107,
+            dc.getHeight() / 2 - 106,
             Graphics.FONT_SMALL,
             currentTeaTimer.name,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
