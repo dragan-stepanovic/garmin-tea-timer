@@ -71,6 +71,7 @@ class TeaTimerView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
+        drawProgressArc(dc);
         drawTeaName(dc);
         drawTimer(dc);
         drawPageDots(dc);
@@ -80,6 +81,27 @@ class TeaTimerView extends WatchUi.View {
         var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return minutes + ":" + seconds.format("%02d");
+    }
+
+    function drawProgressArc(dc) {
+        var totalSeconds = teaTypes[currentTeaIndex][1];
+        var elapsedSeconds = totalSeconds - secondsRemaining;
+        var progress = elapsedSeconds.toFloat() / totalSeconds.toFloat();
+        var teaColor = teaTypes[currentTeaIndex][2];
+
+        // Only draw progress if timer has started
+        if (elapsedSeconds > 0) {
+            var centerX = dc.getWidth() / 2;
+            var centerY = dc.getHeight() / 2;
+            var radius = (dc.getWidth() / 2) - 10;
+
+            // Calculate arc angle (0 = top, clockwise)
+            var arcAngle = (progress * 360).toNumber();
+
+            dc.setColor(teaColor, Graphics.COLOR_BLACK);
+            dc.setPenWidth(6);
+            dc.drawArc(centerX, centerY, radius, Graphics.ARC_CLOCKWISE, 90, 90 - arcAngle);
+        }
     }
 
     function drawTeaName(dc) {
