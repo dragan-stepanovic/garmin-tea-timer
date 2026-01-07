@@ -4,18 +4,22 @@ using Toybox.Graphics;
 using Toybox.Timer;
 using Toybox.Attention;
 
+var timerView;
+
 class TeaTimerApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
     }
 
     function getInitialView() {
-        return [new TeaTimerView()];
+        timerView = new TeaTimerView();
+        return [timerView, new TeaTimerDelegate()];
     }
 }
 
 class TeaTimerView extends WatchUi.View {
-    var secondsRemaining = 1;
+    const INITIAL_SECONDS = 1;
+    var secondsRemaining = INITIAL_SECONDS;
     var timer;
 
     function initialize() {
@@ -41,6 +45,11 @@ class TeaTimerView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
+    function restart() {
+        secondsRemaining = INITIAL_SECONDS;
+        WatchUi.requestUpdate();
+    }
+
     function onUpdate(dc) {
         var minutes = secondsRemaining / 60;
         var seconds = secondsRemaining % 60;
@@ -55,5 +64,18 @@ class TeaTimerView extends WatchUi.View {
             timeString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
+    }
+}
+
+class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
+    function initialize() {
+        BehaviorDelegate.initialize();
+    }
+
+    function onSelect() {
+        if (timerView.secondsRemaining == 0) {
+            timerView.restart();
+        }
+        return true;
     }
 }
