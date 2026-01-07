@@ -91,6 +91,24 @@ class TeaTimerView extends WatchUi.View {
             timeString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
+
+        // Page dots (vertical, right side)
+        var dotRadius = 5;
+        var dotSpacing = 16;
+        var totalHeight = (teaTypes.size() - 1) * dotSpacing;
+        var dotX = dc.getWidth() - 25;
+        var startY = dc.getHeight() / 2 - totalHeight / 2;
+
+        for (var i = 0; i < teaTypes.size(); i++) {
+            var dotY = startY + i * dotSpacing;
+            if (i == currentTeaIndex) {
+                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+                dc.fillCircle(dotX, dotY, dotRadius);
+            } else {
+                dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_BLACK);
+                dc.fillCircle(dotX, dotY, dotRadius);
+            }
+        }
     }
 }
 
