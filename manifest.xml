@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
-    <iq:application id="a3f1b2c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c" type="watch-app" name="@Strings.AppName" entry="TeaTimerApp" launcherIcon="@Drawables.LauncherIcon">
+    <iq:application id="a3f1b2c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c" type="watch-app" name="@Strings.AppName" entry="TeaTimerApp" launcherIcon="@Drawables.LauncherIcon" version="1.0.0">
         <iq:products>
             <iq:product id="venu3"/>
         </iq:products>

@@ -52,14 +52,7 @@ class TeaTimerView extends WatchUi.View {
                     new Attention.VibeProfile(0, 300),
                     new Attention.VibeProfile(100, 500)
                 ]);
-                Attention.playTone({
-                    :toneProfile => [
-                        new Attention.ToneProfile(800, 150),
-                        new Attention.ToneProfile(1000, 150),
-                        new Attention.ToneProfile(1200, 300)
-                    ],
-                    :repeatCount => 1
-                });
+                Attention.playTone(Attention.TONE_ALARM);
             }
         }
         WatchUi.requestUpdate();
