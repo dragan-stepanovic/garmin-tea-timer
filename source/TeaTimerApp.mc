@@ -3,6 +3,7 @@ using Toybox.WatchUi;
 using Toybox.Graphics;
 using Toybox.Timer;
 using Toybox.Attention;
+using Toybox.Lang;
 
 var timerView;
 
@@ -33,7 +34,7 @@ class TeaTimerView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        secondsRemaining = (teaTypes[currentTeaIndex] as Array)[1] as Number;
+        secondsRemaining = teaTypes[currentTeaIndex][1];
         timer = new Timer.Timer();
     }
 
@@ -60,7 +61,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function restart() {
-        secondsRemaining = (teaTypes[currentTeaIndex] as Array)[1] as Number;
+        secondsRemaining = teaTypes[currentTeaIndex][1];
         isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
@@ -76,14 +77,14 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function formatTimeString() {
-        var minutes = ((secondsRemaining as Number) / 60).toNumber();
+        var minutes = (secondsRemaining / 60).toNumber();
         var seconds = secondsRemaining % 60;
         return minutes + ":" + seconds.format("%02d");
     }
 
     function drawTeaName(dc) {
-        var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
-        var teaIcon = (teaTypes[currentTeaIndex] as Array)[2] as String;
+        var teaName = teaTypes[currentTeaIndex][0];
+        var teaIcon = teaTypes[currentTeaIndex][2];
 
         // Draw icon above tea name
         dc.drawText(
