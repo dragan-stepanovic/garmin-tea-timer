@@ -133,6 +133,20 @@ class TeaTimerView extends WatchUi.View {
         }
     }
 
+    function handleNextPage() {
+        if (!isRunning) {
+            currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
+            restart();
+        }
+    }
+
+    function handlePreviousPage() {
+        if (!isRunning) {
+            currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
+            restart();
+        }
+    }
+
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
@@ -227,18 +241,12 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onNextPage() {
-        if (!timerView.isRunning) {
-            currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
-            timerView.restart();
-        }
+        timerView.handleNextPage();
         return true;
     }
 
     function onPreviousPage() {
-        if (!timerView.isRunning) {
-            currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
-            timerView.restart();
-        }
+        timerView.handlePreviousPage();
         return true;
     }
 }
