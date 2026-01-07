@@ -21,6 +21,11 @@ class Tea {
     function getElapsedSeconds(secondsRemaining) {
         return durationSeconds - secondsRemaining;
     }
+
+    function getProgress(secondsRemaining) {
+        var elapsedSeconds = getElapsedSeconds(secondsRemaining);
+        return elapsedSeconds.toFloat() / durationSeconds.toFloat();
+    }
 }
 
 var teaTypes = [
@@ -101,7 +106,6 @@ class TeaTimerView extends WatchUi.View {
     function drawProgressArc(dc) {
         var currentTea = teaTypes[currentTeaIndex];
         var elapsedSeconds = currentTea.getElapsedSeconds(secondsRemaining);
-        var progress = elapsedSeconds.toFloat() / currentTea.durationSeconds.toFloat();
 
         // Only draw progress if timer has started
         if (elapsedSeconds > 0) {
@@ -110,6 +114,7 @@ class TeaTimerView extends WatchUi.View {
             var radius = (dc.getWidth() / 2) - 10;
 
             // Calculate arc angle (0 = top, clockwise)
+            var progress = currentTea.getProgress(secondsRemaining);
             var arcAngle = (progress * 360).toNumber();
 
             dc.setColor(currentTea.color, Graphics.COLOR_BLACK);
