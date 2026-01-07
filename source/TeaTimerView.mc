@@ -39,7 +39,7 @@ class TeaTimerView extends WatchUi.View {
         ]);
     }
 
-    function restart() {
+    function reset() {
         currentTeaTimer.reset();
         isRunning = false;
         timer.stop();
@@ -48,7 +48,7 @@ class TeaTimerView extends WatchUi.View {
 
     function onSelect() {
         if (currentTeaTimer.isComplete()) {
-            restart();
+            reset();
         } else if (!isRunning) {
             startTimer();
         }
@@ -58,7 +58,7 @@ class TeaTimerView extends WatchUi.View {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
             currentTeaTimer = teaTypes[currentTeaTimerIndex];
-            restart();
+            reset();
         }
     }
 
@@ -66,7 +66,7 @@ class TeaTimerView extends WatchUi.View {
         if (!isRunning) {
             currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
             currentTeaTimer = teaTypes[currentTeaTimerIndex];
-            restart();
+            reset();
         }
     }
 
