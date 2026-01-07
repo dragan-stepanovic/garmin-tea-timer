@@ -38,12 +38,6 @@ class TeaTimer {
         return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }
 
-    function formatTimeRemaining() {
-        var minutes = (secondsRemaining / 60).toNumber();
-        var seconds = secondsRemaining % 60;
-        return minutes + ":" + seconds.format("%02d");
-    }
-
     function isComplete() {
         return secondsRemaining == 0;
     }
@@ -167,7 +161,9 @@ class TeaTimerView extends WatchUi.View {
 
     function formatTimeString() {
         var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-        return currentTeaTimer.formatTimeRemaining();
+        var minutes = (currentTeaTimer.secondsRemaining / 60).toNumber();
+        var seconds = currentTeaTimer.secondsRemaining % 60;
+        return minutes + ":" + seconds.format("%02d");
     }
 
     function drawProgressArc(dc) {
