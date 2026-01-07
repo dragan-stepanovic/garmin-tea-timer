@@ -66,7 +66,7 @@ class TeaTimerView extends WatchUi.View {
 
     function onUpdate(dc) {
         var teaName = (teaTypes[currentTeaIndex] as Array)[0] as String;
-        var minutes = (secondsRemaining / 60).toNumber();
+        var minutes = ((secondsRemaining as Number) / 60).toNumber();
         var seconds = secondsRemaining % 60;
         var timeString = minutes + ":" + seconds.format("%02d");
 
