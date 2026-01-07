@@ -34,7 +34,7 @@ class TeaTimer {
         return durationSeconds - secondsRemaining;
     }
 
-    function progress() {
+    function completionRatio() {
         return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }
 
@@ -181,7 +181,7 @@ class TeaTimerView extends WatchUi.View {
             var radius = (dc.getWidth() / 2) - 10;
 
             // Calculate arc angle (0 = top, clockwise)
-            var progressValue = currentTeaTimer.progress();
+            var progressValue = currentTeaTimer.completionRatio();
             var arcAngle = (progressValue * 360).toNumber();
 
             dc.setColor(currentTeaTimer.color, Graphics.COLOR_BLACK);
