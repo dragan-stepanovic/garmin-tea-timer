@@ -123,6 +123,16 @@ class TeaTimerView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
+    function handleSelect() {
+        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
+
+        if (currentTeaTimer.isComplete()) {
+            restart();
+        } else if (!isRunning) {
+            startTimer();
+        }
+    }
+
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
@@ -212,13 +222,7 @@ class TeaTimerDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() {
-        var currentTeaTimer = teaTypes[currentTeaTimerIndex];
-
-        if (currentTeaTimer.isComplete()) {
-            timerView.restart();
-        } else if (!timerView.isRunning) {
-            timerView.startTimer();
-        }
+        timerView.handleSelect();
         return true;
     }
 
