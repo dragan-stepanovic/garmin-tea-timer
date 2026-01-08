@@ -29,6 +29,10 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTimerComplete() as Void {
+        vibrate();
+    }
+
+    function vibrate() {
         Attention.vibrate([
             new Attention.VibeProfile(100, 500),
             new Attention.VibeProfile(0, 300),
