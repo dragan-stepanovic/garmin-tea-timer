@@ -4,17 +4,17 @@ class TeaTimer {
     var name;
     var durationSeconds;
     var color;
-    var secondsRemaining;
+    var time;
 
     function initialize(name, durationSeconds, color) {
         self.name = name;
         self.durationSeconds = durationSeconds;
         self.color = color;
-        self.secondsRemaining = durationSeconds;
+        self.time = new TimeRemaining(durationSeconds);
     }
 
     function reset(onReset) {
-        secondsRemaining = durationSeconds;
+        time.reset(durationSeconds);
         onReset.invoke();
     }
 
@@ -23,7 +23,7 @@ class TeaTimer {
             return;
         }
 
-        secondsRemaining = secondsRemaining - 1;
+        time.decrease();
         onUpdated.invoke();
 
         if (isComplete()) {
@@ -50,15 +50,15 @@ class TeaTimer {
     }
 
     function timeRemaining() {
-        return [minutesLeft(), secondsLeft()];
+        return [time.minutesLeft(), time.secondsLeft()];
     }
 
     function minutesLeft() {
-        return (secondsRemaining / 60).toNumber();
+        return time.minutesLeft();
     }
 
     function secondsLeft() {
-        return secondsRemaining % 60;
+        return time.secondsLeft();
     }
 
     function completionRatio() {
@@ -66,7 +66,7 @@ class TeaTimer {
     }
 
     function elapsedSeconds() {
-        return durationSeconds - secondsRemaining;
+        return durationSeconds - time.value();
     }
 
     function isReady() {
@@ -74,7 +74,7 @@ class TeaTimer {
     }
 
     function isComplete() {
-        return secondsRemaining == 0;
+        return time.isZero();
     }
 
     function isNotRunning() {
@@ -82,6 +82,6 @@ class TeaTimer {
     }
 
     function alreadyCompleted() {
-        return secondsRemaining == 0;
+        return time.isZero();
     }
 }
