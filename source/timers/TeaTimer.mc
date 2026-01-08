@@ -18,13 +18,13 @@ class TeaTimer {
         onReset.invoke();
     }
 
-    function advance(onUpdated, onComplete) {
+    function advance(onAdvanced, onComplete) {
         if (alreadyCompleted()) {
             return;
         }
 
         timeRemaining.decrease();
-        onUpdated.invoke();
+        onAdvanced.invoke();
 
         if (isComplete()) {
             onComplete.invoke();
