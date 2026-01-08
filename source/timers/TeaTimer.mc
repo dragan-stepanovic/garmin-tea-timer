@@ -61,12 +61,12 @@ class TeaTimer {
         return secondsRemaining % 60;
     }
 
-    function elapsedSeconds() {
-        return durationSeconds - secondsRemaining;
-    }
-
     function completionRatio() {
         return elapsedSeconds().toFloat() / durationSeconds.toFloat();
+    }
+
+    function elapsedSeconds() {
+        return durationSeconds - secondsRemaining;
     }
 
     function isReady() {
