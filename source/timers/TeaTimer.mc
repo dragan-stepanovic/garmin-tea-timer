@@ -71,9 +71,9 @@ class TeaTimer {
         return isReady() || isComplete();
     }
 
-    function ifNotRunning(onNotRunning) {
+    function ifNotRunning(doThis) {
         if (isNotRunning()) {
-            onNotRunning.invoke();
+            doThis.invoke();
         }
     }
 }
