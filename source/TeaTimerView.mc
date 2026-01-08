@@ -45,7 +45,7 @@ class TeaTimerView extends WatchUi.View {
 
     function onTimerReset() {
         garminTimer.stop();
-        WatchUi.requestUpdate();
+        updateUI();
     }
 
     function switchToNextTeaType() {
@@ -65,11 +65,15 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTimerUpdated() as Void {
-        WatchUi.requestUpdate();
+        updateUI();
     }
 
     function onTimerComplete() as Void {
         vibrate();
+    }
+
+    function updateUI() as Void {
+        WatchUi.requestUpdate();
     }
 
     function vibrate() {
