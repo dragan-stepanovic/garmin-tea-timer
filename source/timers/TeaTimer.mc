@@ -2,19 +2,19 @@ using Toybox.Lang;
 
 class TeaTimer {
     var name;
-    var durationSeconds;
+    var durationInSeconds;
     var color;
     var timeRemaining;
 
-    function initialize(name, durationSeconds, color) {
+    function initialize(name, durationInSeconds, color) {
         self.name = name;
-        self.durationSeconds = durationSeconds;
+        self.durationInSeconds = durationInSeconds;
         self.color = color;
-        self.timeRemaining = new TimeRemaining(durationSeconds);
+        self.timeRemaining = new TimeRemaining(durationInSeconds);
     }
 
     function reset(onReset) {
-        timeRemaining.reset(durationSeconds);
+        timeRemaining.reset(durationInSeconds);
         onReset.invoke();
     }
 
@@ -54,11 +54,11 @@ class TeaTimer {
     }
 
     function completionRatio() {
-        return elapsedSeconds().toFloat() / durationSeconds.toFloat();
+        return elapsedSeconds().toFloat() / durationInSeconds.toFloat();
     }
 
     function elapsedSeconds() {
-        return durationSeconds - timeRemaining.asInt();
+        return durationInSeconds - timeRemaining.asInt();
     }
 
     function isReady() {
