@@ -47,7 +47,7 @@ class TeaTimer {
         return secondsRemaining == 0;
     }
 
-    function onReadyOrComplete(onReady, onComplete) {
+    function ifReadyOrComplete(onReady, onComplete) {
         if (isReady()) {
             onReady.invoke();
             return;

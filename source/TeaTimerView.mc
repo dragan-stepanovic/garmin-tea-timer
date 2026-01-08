@@ -43,7 +43,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onSelect() {
-        currentTeaTimer.onReadyOrComplete(method(:startTimer), method(:reset));
+        currentTeaTimer.ifReadyOrComplete(method(:startTimer), method(:reset));
     }
 
     function onNextPage() {
