@@ -49,18 +49,6 @@ class TeaTimer {
         }
     }
 
-    function getTimeRemaining() {
-        return [timeRemaining.minutesLeft(), timeRemaining.secondsLeft()];
-    }
-
-    function minutesLeft() {
-        return timeRemaining.minutesLeft();
-    }
-
-    function secondsLeft() {
-        return timeRemaining.secondsLeft();
-    }
-
     function completionRatio() {
         return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }

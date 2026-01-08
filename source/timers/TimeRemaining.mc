@@ -23,6 +23,10 @@ class TimeRemaining {
         return secondsRemaining % 60;
     }
 
+    function minutesAndSecondsLeft() {
+        return [minutesLeft(), secondsLeft()];
+    }
+
     function isZero() {
         return secondsRemaining == 0;
     }
