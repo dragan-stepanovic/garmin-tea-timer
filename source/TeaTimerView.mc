@@ -40,7 +40,10 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function reset() {
-        currentTeaTimer.reset();
+        currentTeaTimer.reset(method(:onTimerReset));
+    }
+
+    function onTimerReset() {
         timer.stop();
         WatchUi.requestUpdate();
     }

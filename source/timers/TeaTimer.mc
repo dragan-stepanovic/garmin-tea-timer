@@ -13,8 +13,9 @@ class TeaTimer {
         self.secondsRemaining = durationSeconds;
     }
 
-    function reset() {
+    function reset(onReset) {
         secondsRemaining = durationSeconds;
+        onReset.invoke();
     }
 
     function tick(onComplete) {
