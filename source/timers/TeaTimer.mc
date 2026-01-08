@@ -50,9 +50,15 @@ class TeaTimer {
     }
 
     function timeRemaining() {
-        var minutes = (secondsRemaining / 60).toNumber();
-        var seconds = secondsRemaining % 60;
-        return [minutes, seconds];
+        return [minutesLeft(), secondsLeft()];
+    }
+
+    function minutesLeft() {
+        return (secondsRemaining / 60).toNumber();
+    }
+
+    function secondsLeft() {
+        return secondsRemaining % 60;
     }
 
     function elapsedSeconds() {
