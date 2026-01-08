@@ -27,6 +27,10 @@ class TimeRemaining {
         return secondsRemaining;
     }
 
+    function elapsedSecondsFrom(durationInSeconds) {
+        return durationInSeconds - secondsRemaining;
+    }
+
     function minutesLeft() {
         return (secondsRemaining / 60).toNumber();
     }

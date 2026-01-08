@@ -58,7 +58,7 @@ class TeaTimer {
     }
 
     function elapsedSeconds() {
-        return durationInSeconds - timeRemaining.asInt();
+        return timeRemaining.elapsedSecondsFrom(durationInSeconds);
     }
 
     function isReady() {
