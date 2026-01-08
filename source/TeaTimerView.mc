@@ -5,7 +5,7 @@ using Toybox.Attention;
 using Toybox.Lang;
 
 class TeaTimerView extends WatchUi.View {
-    var timer;
+    var garminTimer;
     var currentTeaTimer;
     var teaTypes;
     var currentTeaTimerIndex = 0;
@@ -13,7 +13,7 @@ class TeaTimerView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        timer = new Timer.Timer();
+        garminTimer = new Timer.Timer();
         teaTypes = TeaTimers.all();
         currentTeaTimer = teaTypes[currentTeaTimerIndex];
         drawer = new TeaTimerDrawer();
@@ -36,7 +36,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function startTimer() {
-        timer.start(method(:onTick), 1000, true);
+        garminTimer.start(method(:onTick), 1000, true);
     }
 
     function reset() {
@@ -44,7 +44,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTimerReset() {
-        timer.stop();
+        garminTimer.stop();
         WatchUi.requestUpdate();
     }
 
