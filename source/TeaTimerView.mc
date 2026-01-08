@@ -19,8 +19,42 @@ class TeaTimerView extends WatchUi.View {
         drawer = new TeaTimerDrawer();
     }
 
+    function onSelect() {
+        currentTeaTimer.ifReadyOrComplete(method(:startTimer), method(:reset));
+    }
+
+    function onNextPage() {
+        currentTeaTimer.ifNotRunning(method(:switchToNextTeaType));
+    }
+
+    function onPreviousPage() {
+        currentTeaTimer.ifNotRunning(method(:switchToPreviousTeaType));
+    }
+
+    function onUpdate(dc) {
+        drawer.draw(dc, currentTeaTimer, currentTeaTimerIndex, teaTypes);
+    }
+
     function startTimer() {
         timer.start(method(:onTick), 1000, true);
+    }
+
+    function reset() {
+        currentTeaTimer.reset();
+        timer.stop();
+        WatchUi.requestUpdate();
+    }
+
+    function switchToNextTeaType() {
+        currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
+        currentTeaTimer = teaTypes[currentTeaTimerIndex];
+        reset();
+    }
+
+    function switchToPreviousTeaType() {
+        currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
+        currentTeaTimer = teaTypes[currentTeaTimerIndex];
+        reset();
     }
 
     function onTick() as Void {
@@ -40,39 +74,5 @@ class TeaTimerView extends WatchUi.View {
             new Attention.VibeProfile(0, 300),
             new Attention.VibeProfile(100, 500)
         ]);
-    }
-
-    function reset() {
-        currentTeaTimer.reset();
-        timer.stop();
-        WatchUi.requestUpdate();
-    }
-
-    function onSelect() {
-        currentTeaTimer.ifReadyOrComplete(method(:startTimer), method(:reset));
-    }
-
-    function onNextPage() {
-        currentTeaTimer.ifNotRunning(method(:switchToNextTeaType));
-    }
-
-    function onPreviousPage() {
-        currentTeaTimer.ifNotRunning(method(:switchToPreviousTeaType));
-    }
-
-    function switchToNextTeaType() {
-        currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
-        currentTeaTimer = teaTypes[currentTeaTimerIndex];
-        reset();
-    }
-
-    function switchToPreviousTeaType() {
-        currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
-        currentTeaTimer = teaTypes[currentTeaTimerIndex];
-        reset();
-    }
-
-    function onUpdate(dc) {
-        drawer.draw(dc, currentTeaTimer, currentTeaTimerIndex, teaTypes);
     }
 }
