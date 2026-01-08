@@ -6,7 +6,6 @@ using Toybox.Lang;
 
 class TeaTimerView extends WatchUi.View {
     var timer;
-    var isRunning = false;
     var currentTeaTimer;
     var teaTypes;
     var currentTeaTimerIndex = 0;
@@ -19,7 +18,6 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function startTimer() {
-        isRunning = true;
         timer.start(method(:onTick), 1000, true);
     }
 
@@ -29,7 +27,6 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTimerComplete() as Void {
-        isRunning = false;
         Attention.vibrate([
             new Attention.VibeProfile(100, 500),
             new Attention.VibeProfile(0, 300),
@@ -41,7 +38,6 @@ class TeaTimerView extends WatchUi.View {
 
     function reset() {
         currentTeaTimer.reset();
-        isRunning = false;
         timer.stop();
         WatchUi.requestUpdate();
     }
