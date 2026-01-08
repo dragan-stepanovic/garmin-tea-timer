@@ -27,8 +27,8 @@ class TimeRemaining {
         return secondsRemaining;
     }
 
-    function elapsedSecondsFrom(durationInSeconds) {
-        return durationInSeconds - secondsRemaining;
+    function elapsedFrom(totalDuration) {
+        return totalDuration - secondsRemaining;
     }
 
     function minutesLeft() {
