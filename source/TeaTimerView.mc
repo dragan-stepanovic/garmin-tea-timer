@@ -5,6 +5,8 @@ using Toybox.Attention;
 using Toybox.Lang;
 
 class TeaTimerView extends WatchUi.View {
+    const EVERY_SECOND = 1000;
+
     var garminTimer;
     var currentTeaTimer;
     var teaTypes;
@@ -36,7 +38,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function startTimer() {
-        garminTimer.start(method(:onTick), 1000, true);
+        garminTimer.start(method(:onTick), EVERY_SECOND, true);
     }
 
     function reset() {
