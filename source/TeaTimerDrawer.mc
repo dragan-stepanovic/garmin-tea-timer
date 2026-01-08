@@ -10,6 +10,7 @@ class TeaTimerDrawer {
         drawTeaIcon(dc, currentTeaTimer, currentTeaTimerIndex);
         drawTeaName(dc, currentTeaTimer);
         drawTimer(dc, currentTeaTimer);
+        drawTemperature(dc, currentTeaTimer);
         drawPageDots(dc, currentTeaTimerIndex, teaTypes);
     }
 
@@ -53,6 +54,19 @@ class TeaTimerDrawer {
             dc.getHeight() / 2,
             Graphics.FONT_NUMBER_HOT,
             timeString,
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
+        );
+    }
+
+    function drawTemperature(dc, currentTeaTimer) {
+        var tempString = currentTeaTimer.temperatureCelsius + "°C";
+
+        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);
+        dc.drawText(
+            dc.getWidth() / 2,
+            dc.getHeight() / 2 + 70,
+            Graphics.FONT_SMALL,
+            tempString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
     }

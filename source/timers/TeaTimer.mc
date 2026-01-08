@@ -4,12 +4,14 @@ class TeaTimer {
     var name;
     var durationInSeconds;
     var color;
+    var temperatureCelsius;
     var timeRemaining;
 
-    function initialize(name, durationInSeconds, color) {
+    function initialize(name, durationInSeconds, color, temperatureCelsius) {
         self.name = name;
         self.durationInSeconds = durationInSeconds;
         self.color = color;
+        self.temperatureCelsius = temperatureCelsius;
         self.timeRemaining = new TimeRemaining(durationInSeconds);
     }
 
