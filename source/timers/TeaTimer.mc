@@ -14,7 +14,7 @@ class TeaTimer {
     }
 
     function reset(onReset) {
-        timeRemaining.reset(durationInSeconds);
+        timeRemaining.resetTo(durationInSeconds);
         onReset.invoke();
     }
 

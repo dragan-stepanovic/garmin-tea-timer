@@ -15,8 +15,8 @@ class TimeRemaining {
         secondsRemaining = secondsRemaining - 1;
     }
 
-    function reset(durationSeconds) {
-        secondsRemaining = durationSeconds;
+    function resetTo(durationInSeconds) {
+        secondsRemaining = durationInSeconds;
     }
 
     function isZero() {
