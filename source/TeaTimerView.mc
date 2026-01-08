@@ -61,7 +61,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onTick() as Void {
-        currentTeaTimer.tick(method(:onTimerComplete));
+        currentTeaTimer.advance(method(:onTimerComplete));
         WatchUi.requestUpdate();
     }
 

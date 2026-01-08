@@ -18,7 +18,7 @@ class TeaTimer {
         onReset.invoke();
     }
 
-    function tick(onComplete) {
+    function advance(onComplete) {
         if (alreadyCompleted()) {
             return;
         }
