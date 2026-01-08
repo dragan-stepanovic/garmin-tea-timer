@@ -29,12 +29,22 @@ class TeaTimer {
         }
     }
 
-    function elapsedSeconds() {
-        return durationSeconds - secondsRemaining;
+    function ifReadyOrComplete(onReady, onComplete) {
+        if (isReady()) {
+            onReady.invoke();
+            return;
+        }
+
+        if (isComplete()) {
+            onComplete.invoke();
+            return;
+        }
     }
 
-    function completionRatio() {
-        return elapsedSeconds().toFloat() / durationSeconds.toFloat();
+    function ifNotRunning(doThis) {
+        if (isNotRunning()) {
+            doThis.invoke();
+        }
     }
 
     function timeRemaining() {
@@ -43,20 +53,12 @@ class TeaTimer {
         return [minutes, seconds];
     }
 
-    function alreadyCompleted() {
-        return secondsRemaining == 0;
+    function elapsedSeconds() {
+        return durationSeconds - secondsRemaining;
     }
 
-    function ifReadyOrComplete(onReady, onComplete) {
-        if (isReady()) {
-            onReady.invoke();
-            return;
-        } 
-        
-        if (isComplete()) {
-            onComplete.invoke();
-            return;
-        }
+    function completionRatio() {
+        return elapsedSeconds().toFloat() / durationSeconds.toFloat();
     }
 
     function isReady() {
@@ -71,9 +73,7 @@ class TeaTimer {
         return isReady() || isComplete();
     }
 
-    function ifNotRunning(doThis) {
-        if (isNotRunning()) {
-            doThis.invoke();
-        }
+    function alreadyCompleted() {
+        return secondsRemaining == 0;
     }
 }
