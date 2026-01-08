@@ -65,5 +65,9 @@ class TeaTimer {
 
     function isComplete() {
         return secondsRemaining == 0;
-    }    
+    }
+
+    function isNotRunning() {
+        return isReady() || isComplete();
+    }
 }

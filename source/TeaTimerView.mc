@@ -51,7 +51,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onNextPage() {
-        if (currentTeaTimer.isReady() || currentTeaTimer.isComplete()) {
+        if (currentTeaTimer.isNotRunning()) {
             currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
             currentTeaTimer = teaTypes[currentTeaTimerIndex];
             reset();
@@ -59,7 +59,7 @@ class TeaTimerView extends WatchUi.View {
     }
 
     function onPreviousPage() {
-        if (currentTeaTimer.isReady() || currentTeaTimer.isComplete()) {
+        if (currentTeaTimer.isNotRunning()) {
             currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
             currentTeaTimer = teaTypes[currentTeaTimerIndex];
             reset();
