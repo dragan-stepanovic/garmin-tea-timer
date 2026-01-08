@@ -14,7 +14,7 @@ class TeaTimerDrawer {
     }
 
     function formatTimeString(currentTeaTimer) {
-        var minutesAndSeconds = currentTeaTimer.timeRemaining();
+        var minutesAndSeconds = currentTeaTimer.getTimeRemaining();
         return minutesAndSeconds[0] + ":" + minutesAndSeconds[1].format("%02d");
     }
 

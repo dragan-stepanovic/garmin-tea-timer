@@ -27,7 +27,7 @@ class TimeRemaining {
         return secondsRemaining == 0;
     }
 
-    function value() {
+    function asInt() {
         return secondsRemaining;
     }
 }
