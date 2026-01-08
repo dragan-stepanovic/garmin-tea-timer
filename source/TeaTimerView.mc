@@ -46,20 +46,24 @@ class TeaTimerView extends WatchUi.View {
         currentTeaTimer.onReadyOrComplete(method(:startTimer), method(:reset));
     }
 
+    function switchToNextTeaType() {
+        currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
+        currentTeaTimer = teaTypes[currentTeaTimerIndex];
+        reset();
+    }
+
+    function switchToPreviousTeaType() {
+        currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
+        currentTeaTimer = teaTypes[currentTeaTimerIndex];
+        reset();
+    }
+
     function onNextPage() {
-        if (currentTeaTimer.isNotRunning()) {
-            currentTeaTimerIndex = (currentTeaTimerIndex + 1) % teaTypes.size();
-            currentTeaTimer = teaTypes[currentTeaTimerIndex];
-            reset();
-        }
+        currentTeaTimer.ifNotRunning(method(:switchToNextTeaType));
     }
 
     function onPreviousPage() {
-        if (currentTeaTimer.isNotRunning()) {
-            currentTeaTimerIndex = (currentTeaTimerIndex - 1 + teaTypes.size()) % teaTypes.size();
-            currentTeaTimer = teaTypes[currentTeaTimerIndex];
-            reset();
-        }
+        currentTeaTimer.ifNotRunning(method(:switchToPreviousTeaType));
     }
 
     function onUpdate(dc) {

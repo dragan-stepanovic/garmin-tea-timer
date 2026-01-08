@@ -70,4 +70,10 @@ class TeaTimer {
     function isNotRunning() {
         return isReady() || isComplete();
     }
+
+    function ifNotRunning(callback) {
+        if (isNotRunning()) {
+            callback.invoke();
+        }
+    }
 }
