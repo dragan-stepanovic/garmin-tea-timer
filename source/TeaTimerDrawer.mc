@@ -64,7 +64,7 @@ class TeaTimerDrawer {
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);
         dc.drawText(
             dc.getWidth() / 2,
-            dc.getHeight() / 2 + 70,
+            dc.getHeight() / 2 + 90,
             Graphics.FONT_SMALL,
             tempString,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
