@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Background -->
+  <circle cx="30" cy="30" r="30" fill="#1A1A2E"/>
+  <!-- Tea bag string -->
+  <line x1="30" y1="8" x2="30" y2="20" stroke="#CCCCCC" stroke-width="1.5"/>
+  <!-- Tea bag tag -->
+  <rect x="26" y="4" width="8" height="6" rx="1" fill="#E07020"/>
+  <!-- Cup outline -->
+  <path d="M14 22 L14 48 Q14 52 18 52 L42 52 Q46 52 46 48 L46 22 Z" 
+        fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+  <!-- Tea liquid -->
+  <path d="M16 28 L16 48 Q16 50 18 50 L42 50 Q44 50 44 48 L44 28 Z" 
+        fill="#C9762B" opacity="0.8"/>
+  <!-- Handle -->
+  <circle cx="52" cy="35" r="8" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+  <!-- Clock hands -->
+  <line x1="30" y1="38" x2="30" y2="32" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  <line x1="30" y1="38" x2="35" y2="38" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="30" cy="38" r="2" fill="#FFFFFF"/>
+</svg>

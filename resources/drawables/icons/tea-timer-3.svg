@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Background -->
+  <rect x="0" y="0" width="60" height="60" rx="12" fill="#2E4A3E"/>
+  <!-- Steam wisps -->
+  <path d="M18 18 Q20 14 18 10" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M26 16 Q28 11 26 6" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Teapot body -->
+  <ellipse cx="24" cy="36" rx="16" ry="14" fill="#F4A460"/>
+  <!-- Teapot lid -->
+  <ellipse cx="24" cy="24" rx="10" ry="4" fill="#D2691E"/>
+  <circle cx="24" cy="22" r="3" fill="#D2691E"/>
+  <!-- Spout -->
+  <path d="M40 32 Q50 28 48 38" stroke="#F4A460" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Handle -->
+  <path d="M8 30 Q2 36 8 42" stroke="#F4A460" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Mini stopwatch -->
+  <circle cx="48" cy="48" r="10" fill="#333333" stroke="#FFFFFF" stroke-width="1.5"/>
+  <line x1="48" y1="48" x2="48" y2="42" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="48" y1="48" x2="52" y2="50" stroke="#FF6B6B" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="48" cy="48" r="1.5" fill="#FFFFFF"/>
+</svg>
